@@ -75,33 +75,86 @@ class ClientController extends Controller
         return view('client.client_profile', compact('profileData'));
     }
 
-    public function ClientProfileStore(Request $request)
-    {
-        $this->clientService->updateClientProfile($request);
+    public function ClientProfileStore(Request $request){
+        $id = Auth::guard('client')->id();
+        $data = Client::find($id);
 
-        return redirect()->back()->with([
-            'message' => 'Profile Updated Successfully',
-            'alert-type' => 'success',
-        ]);
-    }
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+        $data->city_id = $request->city_id;
+        $data->shop_info = $request->shop_info; 
 
-    public function ClientPasswordUpdate(Request $request)
-    {
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|confirmed',
-        ]);
+        $oldPhotoPath = $data->photo;
 
-        if (!$this->clientService->changeClientPassword($request->all())) {
-            return back()->with([
-                'message' => 'Old Password Does Not Match!',
-                'alert-type' => 'error',
-            ]);
+        if ($request->hasFile('photo')) {
+           $file = $request->file('photo');
+           $filename = time().'.'.$file->getClientOriginalExtension();
+           $file->move(public_path('upload/client_images'),$filename);
+           $data->photo = $filename;
+
+           if ($oldPhotoPath && $oldPhotoPath !== $filename) {
+             $this->deleteOldImage($oldPhotoPath);
+           }
+
         }
 
-        return back()->with([
-            'message' => 'Password Changed Successfully',
-            'alert-type' => 'success',
-        ]);
+        if ($request->hasFile('cover_photo')) {
+            $file1 = $request->file('cover_photo');
+            $filename1 = time().'.'.$file1->getClientOriginalExtension();
+            $file1->move(public_path('upload/client_images'),$filename1);
+            $data->cover_photo = $filename1; 
+         }
+
+        $data->save();
+
+        $notification = array(
+            'message' => 'Profile Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
+
+    private function deleteOldImage(string $oldPhotoPath): void {
+        $fullPath = public_path('upload/client_images/'.$oldPhotoPath);
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
+     }
+
+     public function ClientChangePassword(){
+        $id = Auth::guard('client')->id();
+        $profileData = Client::find($id);
+        return view('client.client_change_Password',compact('profileData'));
+     }
+      // End Method 
+
+      public function ClientPasswordUpdate(Request $request){
+        $client = Auth::guard('client')->user();
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed'
+        ]);
+ 
+        if (!Hash::check($request->old_password,$client->password)) {
+            $notification = array(
+                'message' => 'Old Password Does not Match!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+        /// Update the new password 
+        Client::whereId($client->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+                $notification = array(
+                'message' => 'Password Change Successfully',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+     }
+      // End Method 
 }
