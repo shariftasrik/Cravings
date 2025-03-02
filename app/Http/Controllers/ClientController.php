@@ -83,8 +83,8 @@ class ClientController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
-        $data->city_id = $request->city_id;
-        $data->shop_info = $request->shop_info; 
+        // $data->city_id = $request->city_id;
+        // $data->shop_info = $request->shop_info; 
 
         $oldPhotoPath = $data->photo;
 
