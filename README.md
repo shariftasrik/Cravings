@@ -260,7 +260,6 @@ Figma Design   : <a href="https://www.figma.com/design/mIyp8Q47ff0GPxNW5YWKlt/Cr
                      <li>Table for User, Restaurants and MenuItem at Database</li>
 					 <li>Order History</li>
 					 <li>Multi Item Cart functionality</li>
-					 <li>Payment options</li>
 					 <li>Approve or Reject new Restaurants registration by Admin</li>
 					 <li>Restaurant Dash Board</li>
 					 <li>Admin Dashboard</li>

@@ -6,81 +6,74 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; 
 use App\Models\Client;
-//use App\Models\City;
+use App\Services\ClientService;
 
 class ClientController extends Controller
 {
-    public function ClientLogin(){
-        return view('client.client_login');
-   }
-   // End Method 
+    protected $clientService;
 
-   public function ClientRegister(){
-    return view('client.client_register');
-}
-// End Method 
-
-    public function ClientRegisterSubmit(Request $request){
-        $request->validate([
-            'name' => ['required','string','max:200'],
-            'email' => ['required','string','unique:clients']
-        ]);
-
-        Client::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'password' => Hash::make($request->password),
-            'role' => 'client',
-            'status' => '0', 
-        ]);
-
-        $notification = array(
-            'message' => 'Client Register Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('client.login')->with($notification);
-
+    public function __construct(ClientService $clientService)
+    {
+        $this->clientService = $clientService;
     }
-    // End Method 
 
-    public function ClientLoginSubmit(Request $request){
+    public function ClientRegister()
+    {
+        return view('client.client_register');
+    }
+
+    public function ClientLogin()
+    {
+        return view('client.client_login');
+    }
+
+    public function ClientDashboard()
+    {
+        return view('client.index');
+    }
+    public function ClientRegisterSubmit(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:200'],
+            'email' => ['required', 'string', 'unique:clients'],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        $this->clientService->registerClient($request->all());
+
+        return redirect()->route('client.login')->with([
+            'message' => 'Client Registered Successfully',
+            'alert-type' => 'success',
+        ]);
+    }
+
+    public function ClientLoginSubmit(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        $check = $request->all();
-        $data = [
-            'email' => $check['email'],
-            'password' => $check['password'],
-        ];
-        if (Auth::guard('client')->attempt($data)) {
-            return redirect()->route('client.dashboard')->with('success','Login Successfully');
-        }else{
-            return redirect()->route('client.login')->with('error','Invalid Creadentials');
+
+        if ($this->clientService->loginClient($request->only('email', 'password'))) {
+            return redirect()->route('client.dashboard')->with('success', 'Login Successfully');
         }
-    }
-    // End Method 
 
-    public function ClientDashboard(){
-        return view('client.client_dashboard');
+        return redirect()->route('client.login')->with('error', 'Invalid Credentials');
     }
-    // End Method 
 
-    public function ClientLogout(){
-        Auth::guard('client')->logout();
-        return redirect()->route('client.login')->with('success','Logout Success');
+    public function ClientLogout()
+    {
+        $this->clientService->logoutClient();
+
+        return redirect()->route('client.login')->with('success', 'Logout Successful');
     }
-    // End Method 
 
-    public function ClientProfile(){
-        //$city = City::latest()->get();
-        $id = Auth::guard('client')->id();
-        $profileData = Client::find($id);
-        return view('client.client_profile',compact('profileData','city'));
-     }
-    // End Method 
+    public function ClientProfile()
+    {
+        $profileData = $this->clientService->getClientProfile();
+
+        return view('client.client_profile', compact('profileData'));
+    }
 
     public function ClientProfileStore(Request $request){
         $id = Auth::guard('client')->id();
@@ -96,14 +89,14 @@ class ClientController extends Controller
         $oldPhotoPath = $data->photo;
 
         if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('upload/client_images'),$filename);
-            $data->photo = $filename;
+           $file = $request->file('photo');
+           $filename = time().'.'.$file->getClientOriginalExtension();
+           $file->move(public_path('upload/client_images'),$filename);
+           $data->photo = $filename;
 
-            if ($oldPhotoPath && $oldPhotoPath !== $filename) {
-                $this->deleteOldImage($oldPhotoPath);
-            }
+           if ($oldPhotoPath && $oldPhotoPath !== $filename) {
+             $this->deleteOldImage($oldPhotoPath);
+           }
 
         }
 
@@ -112,7 +105,7 @@ class ClientController extends Controller
             $filename1 = time().'.'.$file1->getClientOriginalExtension();
             $file1->move(public_path('upload/client_images'),$filename1);
             $data->cover_photo = $filename1; 
-            }
+         }
 
         $data->save();
 
@@ -123,30 +116,28 @@ class ClientController extends Controller
 
         return redirect()->back()->with($notification);
     }
-    // End Method 
 
     private function deleteOldImage(string $oldPhotoPath): void {
         $fullPath = public_path('upload/client_images/'.$oldPhotoPath);
         if (file_exists($fullPath)) {
             unlink($fullPath);
         }
-    }
-    // End Private Method 
+     }
 
-    public function ClientChangePassword(){
+     public function ClientChangePassword(){
         $id = Auth::guard('client')->id();
         $profileData = Client::find($id);
         return view('client.client_change_Password',compact('profileData'));
-    }
-    // End Method 
+     }
+      // End Method 
 
-    public function ClientPasswordUpdate(Request $request){
+      public function ClientPasswordUpdate(Request $request){
         $client = Auth::guard('client')->user();
         $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|confirmed'
         ]);
-
+ 
         if (!Hash::check($request->old_password,$client->password)) {
             $notification = array(
                 'message' => 'Old Password Does not Match!',
@@ -164,6 +155,6 @@ class ClientController extends Controller
                 'alert-type' => 'success'
             );
             return back()->with($notification);
-    }
-    // End Method 
+     }
+      // End Method 
 }

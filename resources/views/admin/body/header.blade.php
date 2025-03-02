@@ -173,12 +173,12 @@
                     <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ $profileData->name }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
-                <div class="dropdown-menu dropdown-menu-end">
+                <div class="dropdown-menu dropdown-menu-end ">
                     <!-- item-->
-                    <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
-                    <a class="dropdown-item" href="{{ route('admin.change.password') }}"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Change Password</a>
+                    <a class="dropdown-item" data-toggle="dropdown" href="{{ route('admin.profile') }}"><i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item" data-toggle="dropdown" href="{{ route('admin.change.password') }}"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Change Password</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                    <a class="dropdown-item" data-toggle="dropdown" href="{{ route('admin.logout') }}"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                 </div>
             </div>
 
