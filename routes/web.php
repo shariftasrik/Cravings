@@ -103,3 +103,14 @@ Route::middleware('client')->group(function () {
     
 });
 // End Client Middleware
+
+
+Route::controller(RestaurantController::class)->group(function(){
+    Route::get('/all/product', 'AllProduct')->name('all.product');
+    Route::get('/add/menu', 'AddMenu')->name('add.menu');
+    Route::post('/store/menu', 'StoreMenu')->name('menu.store');
+    Route::get('/edit/menu/{id}', 'EditMenu')->name('edit.menu');
+    Route::post('/update/menu', 'UpdateMenu')->name('menu.update');
+    Route::get('/delete/menu/{id}', 'DeleteMenu')->name('delete.menu');
+});
+// End Restaurent Middleware
