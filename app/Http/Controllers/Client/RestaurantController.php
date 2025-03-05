@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use App\Models\Category;
+use App\Models\City;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver; 
 use App\Models\Menu;
@@ -114,11 +115,19 @@ class RestaurantController extends Controller
     // End Method 
 
 
-    /// All Product Method started 
+    /// All Product Method  
 
     public function AllProduct(){
         $product = Product::latest()->get();
         return view('client.backend.product.all_product', compact('product'));
+    } 
+    // End Method 
+
+    public function AddProduct(){
+        $category = Category::latest()->get();
+        $city = City::latest()->get();
+        $menu = Menu::latest()->get();
+        return view('client.backend.product.add_product', compact('category','city','menu'));
     } 
     // End Method 
 
