@@ -51,17 +51,49 @@
             </ul>
         </li>
 
-
+        <!-- Manage Product -->
         <li>
             <a href="javascript: void(0);" class="has-arrow">
-                <i data-feather="users"></i>
-                <span data-key="t-authentication">Authentication</span>
+                <i data-feather="grid"></i>
+                <span data-key="t-apps">Manage Product</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li><a href="auth-login.html" data-key="t-login">Login</a></li>
-                <li><a href="auth-register.html" data-key="t-register">Register</a></li>
+                <li>
+                    <a href="{{ route('admin.all.product') }}">
+                        <span data-key="t-calendar">All Product</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.add.product') }}">
+                        <span data-key="t-chat">Add Product</span>
+                    </a>
+                </li> 
+               
             </ul>
         </li>
+
+        <!-- Manage Restaurant -->
+        <li>
+            <a href="javascript: void(0);" class="has-arrow">
+                <i data-feather="grid"></i>
+                <span data-key="t-apps">Manage Restaurant</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li>
+                    <a href="{{ route('pending.restaurant') }}">
+                        <span data-key="t-calendar">Pending Restaurant</span>
+                    </a>
+                </li>
+
+                <li>
+                <a href="{{ route('approve.restaurant') }}">
+                        <span data-key="t-chat">Approve Restaurant</span>
+                    </a>
+                </li> 
+
+            </ul>
+        </li>
+
 
         <li class="menu-title mt-2" data-key="t-components">Elements</li>
 
