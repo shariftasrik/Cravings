@@ -28,6 +28,20 @@ body {
     font-weight: 500;
     font-family: 'Mulish', sans-serif;
 }
+
+#logoCravings{
+    color: #fe4c00;
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+
+
+
 button, a {
     outline: none !important;
     color: #dd646e;
