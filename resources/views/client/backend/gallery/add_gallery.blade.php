@@ -25,48 +25,37 @@
 
         <div class="row">
             <div class="col-xl-9 col-lg-8"> 
- <div class="card">
-<div class="card-body p-4">
+                <div class="card">
+                    <div class="card-body p-4">
 
-<form id="myForm" action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
-    @csrf
-    
-<div class="row">
-      
-    <div class="col-lg-6">
-        <div class="mt-3 mt-lg-0">
-            
-            <div class="form-group mb-3">
-                <label for="example-text-input" class="form-label">Gallery Image</label>
-                <input class="form-control" name="gallery_img[]" type="file" id="multiImg" multiple>
-                <div class="row" id="preview_img"></div>
-            </div>
-          
-            <div class="mt-4">
-                <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
-            </div>
-              
-        </div>
-    </div>
-</div>
-</form>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
+                        <form id="myForm" action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            
+                            <div class="row">
+                                
+                                <div class="col-lg-6">
+                                    <div class="mt-3 mt-lg-0">
+                                        
+                                        <div class="form-group mb-3">
+                                            <label for="example-text-input" class="form-label">Gallery Image</label>
+                                            <input class="form-control" name="gallery_img[]" type="file" id="multiImg" multiple>
+                                            <div class="row" id="preview_img"></div>
+                                        </div>
+                                    
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                
                 <!-- end tab content -->
             </div>
-            <!-- end col -->
-
-            
+            <!-- end col --> 
             <!-- end col -->
         </div>
         <!-- end row -->
@@ -103,7 +92,7 @@
      });
     });
      
-    </script>
+</script>
 
 
 @endsection
