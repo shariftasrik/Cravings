@@ -85,6 +85,9 @@
                         <label for="example-text-input" class="form-label">City</label>
                         <select name="city_id" class="form-select">
                             <option>Select</option>
+                            @foreach ($city as $cit)
+                                <option value="{{ $cit->id }}" {{ $cit->id == $profileData->city_id ? 'selected' : '' }} >{{ $cit->city_name }}</option>
+                            @endforeach 
                         </select>
                     </div>
 
@@ -97,8 +100,9 @@
                         <label for="example-text-input" class="form-label">Cover Photo </label>
                         <input class="form-control" name="cover_photo" type="file"  id="image" >
                     </div>
-                
+
                     <img id="showImage" src="{{ (!empty($profileData->cover_photo)) ? url('upload/client_images/'.$profileData->cover_photo) : url('upload/no_image.jpg') }}" alt="" class="p-1 bg-primary" width="210" height="100">
+
                 </div>
             </div>
 

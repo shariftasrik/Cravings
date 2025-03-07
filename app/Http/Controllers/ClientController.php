@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; 
 use App\Models\Client;
 use App\Services\ClientService;
+use App\Models\City;
 
 class ClientController extends Controller
 {
@@ -70,9 +71,10 @@ class ClientController extends Controller
 
     public function ClientProfile()
     {
+        $city = City::latest()->get();
         $profileData = $this->clientService->getClientProfile();
 
-        return view('client.client_profile', compact('profileData'));
+        return view('client.client_profile', compact('profileData','city'));
     }
 
     public function ClientProfileStore(Request $request){
@@ -83,8 +85,8 @@ class ClientController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
-        // $data->city_id = $request->city_id;
-        // $data->shop_info = $request->shop_info; 
+        $data->city_id = $request->city_id;
+        $data->shop_info = $request->shop_info; 
 
         $oldPhotoPath = $data->photo;
 
