@@ -266,5 +266,13 @@ class RestaurantController extends Controller
     // End Method 
 
 
+    public function ChangeStatus(Request $request){
+        $product = Product::find($request->product_id);
+        $product->status = $request->status;
+        $product->save();
+        return response()->json(['success' => 'Status Change Successfully']);
+    }
+     // End Method 
+
 
 }
