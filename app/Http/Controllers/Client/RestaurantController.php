@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use App\Models\Category;
+use App\Models\City;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver; 
 use App\Models\Menu;
 use App\Models\Product;
-use App\Models\City;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
-use Carbon\Carbon;
 use App\Models\Gllery;
+use Carbon\Carbon;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+
 
 class RestaurantController extends Controller
 {
@@ -117,8 +118,9 @@ class RestaurantController extends Controller
     }
     // End Method 
 
-    ////// All Product Method started 
 
+
+   /// All Product Method  
     public function AllProduct(){
         $product = Product::latest()->get();
         return view('client.backend.product.all_product', compact('product'));
@@ -176,6 +178,7 @@ class RestaurantController extends Controller
     // End Method 
 
     public function EditProduct($id){
+
         $category = Category::latest()->get();
         $city = City::latest()->get();
         $menu = Menu::latest()->get();
@@ -184,10 +187,11 @@ class RestaurantController extends Controller
     } 
     // End Method 
 
+ 
 
     public function UpdateProduct(Request $request){
         $pro_id = $request->id;
-         
+
         if ($request->file('image')) {
             $image = $request->file('image');
             $manager = new ImageManager(new Driver());
@@ -216,7 +220,7 @@ class RestaurantController extends Controller
                 'message' => 'Product Updated Successfully',
                 'alert-type' => 'success'
             );
-    
+
             return redirect()->route('all.product')->with($notification);
 
         }else{
@@ -235,16 +239,16 @@ class RestaurantController extends Controller
                 'best_seller' => $request->best_seller, 
                 'created_at' => Carbon::now(), 
             ]); 
-            
+
             $notification = array(
                 'message' => 'Product Updated Successfully',
                 'alert-type' => 'success'
             );
-    
+
             return redirect()->route('all.product')->with($notification);
 
         }
- 
+
     }
     // End Method 
 
@@ -265,6 +269,7 @@ class RestaurantController extends Controller
     }
     // End Method 
 
+
     public function ChangeStatus(Request $request){
         $product = Product::find($request->product_id);
         $product->status = $request->status;
@@ -273,7 +278,8 @@ class RestaurantController extends Controller
     }
      // End Method 
 
-     /////////// All Gallery Method Start 
+
+     // All Gallery Method
 
      public function AllGallery(){
         $gallery = Gllery::latest()->get();

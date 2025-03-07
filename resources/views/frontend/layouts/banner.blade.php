@@ -6,7 +6,7 @@
                   <div class="homepage-search-title text-center">
                      <h1 class="mb-2 display-4 text-shadow text-white font-weight-normal"><span class="font-weight-bold">Discover the best food & drinks in Dhaka BD
                      </span></h1>
-                     <h5 class="mb-5 text-shadow text-white-50 font-weight-normal">Lists of top restaurants, cafes, pubs, and bars in Melbourne, based on trends</h5>
+                     <h5 class="mb-5 text-shadow text-white-50 font-weight-normal">Lists of top restaurants, cafes, and street food spots in Dhaka, based on trends</h5>
                   </div>
                   <div class="homepage-search-form">
                      <form class="form-noborder">
@@ -35,7 +35,7 @@
                         </div>
                      </form>
                   </div>
-                  <h6 class="mt-4 text-shadow text-white font-weight-normal">E.g. Beverages, Pizzas, Chinese, Bakery, Indian...</h6>
+                  <h6 class="mt-4 text-shadow text-white font-weight-normal">E.g. Beverages, Biriyani, Chinese, Bakery, Bengali Cuisine, Street Food, Fast Food...</h6>
                   <div class="owl-carousel owl-carousel-category owl-theme">
                      <div class="item">
                         <div class="osahan-category-item">

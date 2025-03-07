@@ -125,17 +125,7 @@
             
         </div>
     </form>
-</div>
-
-
-
-
-
-
-
-
-
-               
+</div>    
                 <!-- end tab content -->
             </div>
             <!-- end col -->

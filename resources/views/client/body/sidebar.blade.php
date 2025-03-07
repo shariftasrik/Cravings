@@ -9,12 +9,13 @@
         <li class="menu-title" data-key="t-menu">Menu</li>
 
         <li>
-            <a href="index.html">
+            <a href="../index.blade.php">
                 <i data-feather="home"></i>
                 <span data-key="t-dashboard">Dashboard</span>
             </a>
         </li>
 
+        <!-- Menu -->
         <li>
             <a href="javascript: void(0);" class="has-arrow">
                 <i data-feather="grid"></i>
@@ -35,6 +36,29 @@
                
             </ul>
         </li>
+
+        <!-- Product -->
+        <li>
+            <a href="javascript: void(0);" class="has-arrow">
+                <i data-feather="grid"></i>
+                <span data-key="t-apps">Product</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li>
+                    <a href="{{ route('all.product') }}">
+                        <span data-key="t-calendar">All Product</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('add.product') }}">
+                        <span data-key="t-chat">Add Product</span>
+                    </a>
+                </li> 
+
+            </ul>
+        </li>
+
 
         <li>
             <a href="javascript: void(0);" class="has-arrow">

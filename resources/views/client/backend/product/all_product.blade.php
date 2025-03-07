@@ -26,17 +26,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                     
+
                     <div class="card-body">
 
-        <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+        <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
             <thead>
             <tr>
                 <th>Sl</th>
                 <th>Image</th>
                 <th>Name</th>
                 <th>Menu</th>
-                <th>QTY</th>                
+                <th>QTY</th> <!-- Quantity -->
                 <th>Price</th>
                 <th>Discount</th>
                 <th>Status</th>
@@ -52,18 +52,19 @@
                 <td><img src="{{ asset($item->image) }}" alt="" style="width: 70px; height:40px;"></td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item['menu']['menu_name'] }}</td>
-                <td>{{ $item->qty }}</td>
+                <td>{{ $item->qty }}</td> <!-- Quantity -->
                 <td>{{ $item->price }}</td>                
                 <td>
-        @if ($item->discount_price == NULL)
-            <span class="badge bg-danger">No Discount</span>
-            @else
-            @php
-                $amount = $item->price - $item->discount_price;
-                $discount = ($amount / $item->price) * 100; 
-            @endphp 
-             <span class="badge bg-danger">{{ round($discount) }}%</span>
-        @endif </td>
+                    @if ($item->discount_price == NULL)
+                        <span class="badge bg-danger">No Discount</span>
+                        @else
+                        @php
+                            $amount = $item->price - $item->discount_price;
+                            $discount = ($amount / $item->price) * 100; 
+                        @endphp 
+                        <span class="badge bg-danger">{{ round($discount) }}%</span>
+                    @endif 
+                </td>
                 <td> 
                     @if ($item->status == 1)
                     <span class="text-success"><b>Active</b></span>
@@ -71,15 +72,15 @@
                     <span class="text-danger"><b>InActive</b></span>
                     @endif
                 </td>
-                
-        <td><a href="{{ route('edit.product',$item->id) }}" class="btn btn-info waves-effect waves-light"> <i class="fas fa-edit"></i> </a>
-        <a href="{{ route('delete.product',$item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete"><i class="fas fa-trash"></i></a>
-        <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}>
 
+                <td>
+                    <a href="{{ route('edit.product',$item->id) }}" class="btn btn-info waves-effect waves-light"> <i class="fas fa-edit"></i> </a>
+                    <a href="{{ route('delete.product',$item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete"><i class="fas fa-trash"></i></a>
+                    <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}>
                 </td> 
             </tr>
             @endforeach    
-            
+
             </tbody>
         </table>
 
@@ -88,9 +89,10 @@
             </div> <!-- end col -->
         </div> <!-- end row --> 
 
-         
+
     </div> <!-- container-fluid -->
 </div>
+
 
 <script type="text/javascript">
     $(function() {
@@ -106,39 +108,30 @@
               success: function(data){
                 // console.log(data.success)
   
-                  // Start Message 
-  
-              const Toast = Swal.mixin({
+            // Start Message 
+            const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
                     icon: 'success', 
                     showConfirmButton: false,
                     timer: 3000 
-              })
-              if ($.isEmptyObject(data.error)) {
-                      
-                      Toast.fire({
-                      type: 'success',
-                      title: data.success, 
-                      })
-  
-              }else{
-                 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success, 
+                })
+            }else{            
              Toast.fire({
-                      type: 'error',
-                      title: data.error, 
-                      })
-                  }
-  
-                // End Message   
-  
-  
-              }
+                    type: 'error',
+                    title: data.error, 
+                    })
+            }
+            // End Message   
+            }
           });
       })
     })
-  </script>
-   
-
+</script>
 
 @endsection
