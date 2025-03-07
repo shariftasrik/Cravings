@@ -46,39 +46,40 @@
 
 
             <tbody>
-           @foreach ($product as $key=> $item)  
-            <tr>
-                <td>{{ $key+1 }}</td>
-                <td><img src="{{ asset($item->image) }}" alt="" style="width: 70px; height:40px;"></td>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item['client']['name'] }}</td>
-                <td>{{ $item->qty }}</td>
-                <td>{{ $item->price }}</td>                
-                <td>
-        @if ($item->discount_price == NULL)
-            <span class="badge bg-danger">No Discount</span>
-            @else
-            @php
-                $amount = $item->price - $item->discount_price;
-                $discount = ($amount / $item->price) * 100; 
-            @endphp 
-             <span class="badge bg-danger">{{ round($discount) }}%</span>
-        @endif </td>
-                <td> 
-                    @if ($item->status == 1)
-                    <span class="text-success"><b>Active</b></span>
-                    @else
-                    <span class="text-danger"><b>InActive</b></span>
-                    @endif
-                </td>
+                @foreach ($product as $key=> $item)  
+                    <tr>
+                        <td>{{ $key+1 }}</td>
+                        <td><img src="{{ asset($item->image) }}" alt="" style="width: 70px; height:40px;"></td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item['client']['name'] }}</td>
+                        <td>{{ $item->qty }}</td>
+                        <td>{{ $item->price }}</td>                
+                        <td>
+                            @if ($item->discount_price == NULL)
+                                <span class="badge bg-danger">No Discount</span>
+                                @else
+                                @php
+                                    $amount = $item->price - $item->discount_price;
+                                    $discount = ($amount / $item->price) * 100; 
+                                @endphp 
+                                <span class="badge bg-danger">{{ round($discount) }}%</span>
+                            @endif 
+                        </td>
+                        <td> 
+                            @if ($item->status == 1)
+                            <span class="text-success"><b>Active</b></span>
+                            @else
+                            <span class="text-danger"><b>InActive</b></span>
+                            @endif
+                        </td>
 
-        <td><a href="{{ route('admin.edit.product',$item->id) }}" class="btn btn-info waves-effect waves-light"> <i class="fas fa-edit"></i> </a>
-        <a href="{{ route('admin.delete.product',$item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete"><i class="fas fa-trash"></i></a>
-        <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}>
-
-                </td> 
-            </tr>
-            @endforeach    
+                        <td>
+                            <a href="{{ route('admin.edit.product',$item->id) }}" class="btn btn-info waves-effect waves-light"> <i class="fas fa-edit"></i> </a>
+                            <a href="{{ route('admin.delete.product',$item->id) }}" class="btn btn-danger waves-effect waves-light" id="delete"><i class="fas fa-trash"></i></a>
+                            <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Inactive" {{ $item->status ? 'checked' : '' }}>
+                        </td> 
+                    </tr>
+                @endforeach    
 
             </tbody>
         </table>

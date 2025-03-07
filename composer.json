@@ -9,7 +9,7 @@
         "php": "^8.2",
         "haruncpi/laravel-id-generator": "^1.1",
         "intervention/image": "^3.11",
-        "laravel/framework": "^11.31",
+        "laravel/framework": "^11.44",
         "laravel/tinker": "^2.9"
     },
     "require-dev": {

@@ -50,6 +50,8 @@
                 </li>
             </ul>
         </li>
+
+        <!-- Manage Product -->
         <li>
             <a href="javascript: void(0);" class="has-arrow">
                 <i data-feather="grid"></i>
@@ -61,16 +63,16 @@
                         <span data-key="t-calendar">All Product</span>
                     </a>
                 </li>
-
                 <li>
-                    <a href="{{ route('admin.add.category') }}">
+                    <a href="{{ route('admin.add.product') }}">
                         <span data-key="t-chat">Add Product</span>
                     </a>
                 </li> 
-
+               
             </ul>
         </li>
 
+        <!-- Manage Restaurant -->
         <li>
             <a href="javascript: void(0);" class="has-arrow">
                 <i data-feather="grid"></i>
