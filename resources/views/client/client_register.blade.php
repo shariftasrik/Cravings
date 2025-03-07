@@ -84,11 +84,15 @@
                             <div class="mb-3">
                                 <label class="form-label">Password</label>
                                 <div class="input-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Enter password">
+                                    <input type="password" name="password" class="form-control" placeholder="Enter password" aria-describedby="password-addon">
                                     <button class="btn btn-light shadow-none ms-0" type="button">
                                         <i class="mdi mdi-eye-outline"></i>
                                     </button>
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
                             </div>
                             <div class="mb-3">
                                 <button class="btn btn-primary w-100" type="submit">Register</button>
@@ -131,6 +135,7 @@
         <script src="{{ asset('backend/assets/libs/pace-js/pace.min.js') }}"></script>
         <!-- password addon init -->
         <script src="{{ asset('backend/assets/js/pages/pass-addon.init.js') }}"></script>
+
 
     </body>
 
