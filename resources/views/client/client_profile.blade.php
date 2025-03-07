@@ -125,20 +125,13 @@
             </div>
               
         </div>
+
     </div>
 </div>
-</form>
-</div>
 
+    </form>
+</div>    
 
-
-
-
-
-
-
-
-               
                 <!-- end tab content -->
             </div>
             <!-- end col -->
