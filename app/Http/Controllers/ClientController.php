@@ -6,76 +6,84 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; 
 use App\Models\Client;
-use App\Services\ClientService;
+use App\Models\City;
 
 class ClientController extends Controller
 {
-    protected $clientService;
-
-    public function __construct(ClientService $clientService)
-    {
-        $this->clientService = $clientService;
-    }
-
-    public function ClientRegister()
-    {
-        return view('client.client_register');
-    }
-
-    public function ClientLogin()
-    {
+    public function ClientLogin(){
         return view('client.client_login');
-    }
+   }
+   // End Method 
 
-    public function ClientDashboard()
-    {
-        return view('client.index');
-    }
-    public function ClientRegisterSubmit(Request $request)
-    {
+   public function ClientRegister(){
+    return view('client.client_register');
+}
+// End Method 
+
+    public function ClientRegisterSubmit(Request $request){
         $request->validate([
-            'name' => ['required', 'string', 'max:200'],
-            'email' => ['required', 'string', 'unique:clients'],
-            'password' => ['required', 'confirmed'],
+            'name' => ['required','string','max:200'],
+            'email' => ['required','string','unique:clients']
         ]);
 
-        $this->clientService->registerClient($request->all());
-
-        return redirect()->route('client.login')->with([
-            'message' => 'Client Registered Successfully',
-            'alert-type' => 'success',
+        Client::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'password' => Hash::make($request->password),
+            'role' => 'client',
+            'status' => '0', 
         ]);
+
+        $notification = array(
+            'message' => 'Client Register Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('client.login')->with($notification);
+
     }
+    // End Method 
 
-    public function ClientLoginSubmit(Request $request)
-    {
+    public function ClientLoginSubmit(Request $request){
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        if ($this->clientService->loginClient($request->only('email', 'password'))) {
-            return redirect()->route('client.dashboard')->with('success', 'Login Successfully');
+        $check = $request->all();
+        $data = [
+            'email' => $check['email'],
+            'password' => $check['password'],
+        ];
+        if (Auth::guard('client')->attempt($data)) {
+            return redirect()->route('client.dashboard')->with('success','Login Successfully');
+        }else{
+            return redirect()->route('client.login')->with('error','Invalid Creadentials');
         }
 
-        return redirect()->route('client.login')->with('error', 'Invalid Credentials');
     }
+// End Method 
 
-    public function ClientLogout()
-    {
-        $this->clientService->logoutClient();
-
-        return redirect()->route('client.login')->with('success', 'Logout Successful');
+    public function ClientDashboard(){
+        return view('client.index');
     }
+    // End Method 
 
-    public function ClientProfile()
-    {
-        $profileData = $this->clientService->getClientProfile();
-
-        return view('client.client_profile', compact('profileData'));
+    public function ClientLogout(){
+        Auth::guard('client')->logout();
+        return redirect()->route('client.login')->with('success','Logout Success');
     }
+    // End Method 
 
-    public function ClientProfileStore(Request $request){
+    public function ClientProfile(){
+        $city = City::latest()->get();
+        $id = Auth::guard('client')->id();
+        $profileData = Client::find($id);
+        return view('client.client_profile',compact('profileData','city'));
+     }
+      // End Method 
+ 
+      public function ClientProfileStore(Request $request){
         $id = Auth::guard('client')->id();
         $data = Client::find($id);
 
@@ -83,8 +91,8 @@ class ClientController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
-        // $data->city_id = $request->city_id;
-        // $data->shop_info = $request->shop_info; 
+        $data->city_id = $request->city_id;
+        $data->shop_info = $request->shop_info; 
 
         $oldPhotoPath = $data->photo;
 
@@ -116,13 +124,14 @@ class ClientController extends Controller
 
         return redirect()->back()->with($notification);
     }
-
-    private function deleteOldImage(string $oldPhotoPath): void {
+     // End Method 
+     private function deleteOldImage(string $oldPhotoPath): void {
         $fullPath = public_path('upload/client_images/'.$oldPhotoPath);
         if (file_exists($fullPath)) {
             unlink($fullPath);
         }
      }
+     // End Private Method 
 
      public function ClientChangePassword(){
         $id = Auth::guard('client')->id();
@@ -157,4 +166,6 @@ class ClientController extends Controller
             return back()->with($notification);
      }
       // End Method 
+
+
 }

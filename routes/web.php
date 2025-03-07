@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\RestaurantController;
 
 // Route::get('/', function () {
@@ -58,7 +59,7 @@ Route::middleware('client')->group(function () {
     Route::get('/client/change/password', [ClientController::class, 'ClientChangePassword'])->name('client.change.password');
     Route::post('/client/password/update', [ClientController::class, 'ClientPasswordUpdate'])->name('client.password.update');
     
-});
+}); 
 
 Route::get('/client/login', [ClientController::class, 'ClientLogin'])->name('client.login');
 Route::get('/client/register', [ClientController::class, 'ClientRegister'])->name('client.register');
@@ -88,7 +89,8 @@ Route::middleware('admin')->group(function () {
     });
  
     
-}); // End Admin Middleware
+}); 
+// End Admin Middleware
 
 Route::middleware('client')->group(function () {
 
@@ -132,6 +134,15 @@ Route::middleware('client')->group(function () {
 
     });
     // End Restaurent Middleware
+
+    Route::controller(CouponController::class)->group(function(){
+        Route::get('/all/coupon', 'AllCoupon')->name('all.coupon');
+        Route::get('/add/coupon', 'AddCoupon')->name('add.coupon');
+        Route::post('/store/coupon', 'StoreCoupon')->name('coupon.store');
+        Route::get('/edit/coupon/{id}', 'EditCoupon')->name('edit.coupon');
+        Route::post('/update/coupon', 'UpdateCoupon')->name('coupon.update');
+        Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
+    });
     
 });
 // End Client Middleware

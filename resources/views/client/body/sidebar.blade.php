@@ -9,7 +9,7 @@
         <li class="menu-title" data-key="t-menu">Menu</li>
 
         <li>
-            <a href="../index.blade.php">
+            <a href="{{ route('client.dashboard')}}">
                 <i data-feather="home"></i>
                 <span data-key="t-dashboard">Dashboard</span>
             </a>
@@ -60,7 +60,7 @@
         </li>
 
 
-        <li>
+        <!-- <li>
             <a href="javascript: void(0);" class="has-arrow">
                 <i data-feather="grid"></i>
                 <span data-key="t-apps">Product</span>
@@ -79,8 +79,9 @@
                 </li> 
                
             </ul>
-        </li>
+        </li> -->
 
+        <!-- Gallery -->
         <li>
             <a href="javascript: void(0);" class="has-arrow">
                 <i data-feather="grid"></i>
@@ -101,6 +102,30 @@
                
             </ul>
         </li>
+
+
+        <!-- Coupon -->
+        <li>
+            <a href="javascript: void(0);" class="has-arrow">
+                <i data-feather="grid"></i>
+                <span data-key="t-apps">Coupon</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li>
+                    <a href="{{ route('all.coupon') }}">
+                        <span data-key="t-calendar">All Coupon</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('add.coupon') }}">
+                        <span data-key="t-chat">Add Coupon</span>
+                    </a>
+                </li> 
+
+            </ul>
+        </li>
+
 
         <li>
             <a href="javascript: void(0);" class="has-arrow">
