@@ -426,7 +426,7 @@
                 @if ($coupon == NULL)
                   <p class="mb-0">No Coupon is Available </p>
                 @else
-                  <p class="mb-0">{{ $coupon->discount }}% off on orders above $99 | Use coupon <span class="text-danger font-weight-bold">{{ $coupon->coupon_name }}</span></p>
+                  <p class="mb-0">{{ $coupon->discount }}% off on orders above 300TK | Use coupon <span class="text-danger font-weight-bold">{{ $coupon->coupon_name }}</span></p>
                 @endif
                 <div class="icon-overlap">
                    <i class="icofont-sale-discount"></i>
@@ -471,7 +471,7 @@
 
                         @if (Session::has('coupon'))
                            <div class="mb-2 bg-white rounded p-2 clearfix">
-                              <p class="mb-1">Item Total <span class="float-right text-dark">{{ count((array) session('cart')) }}</span></p>
+                              <p class="mb-1">Total Items<span class="float-right text-dark">{{ count((array) session('cart')) }}</span></p>
 
                               <p class="mb-1">Coupon Name <span class="float-right text-dark">{{ (session()->get('coupon')['coupon_name']) }} ( {{ (session()->get('coupon')['discount']) }} %) </span>
                                  <a type="submit" onclick="couponRemove()"><i class="icofont-ui-delete float-right" style="color: red;"></i></a>
@@ -482,9 +482,9 @@
                                  <span class="float-right text-success">
 
                                     @if (Session::has('coupon'))
-                                       ${{ $total - Session()->get('coupon')['discount_amount'] }}
+                                       {{ $total - Session()->get('coupon')['discount_amount'] }} TK
                                     @else
-                                    ${{ $total }}
+                                       {{ $total }} TK
                                     @endif
 
                                  </span>
@@ -492,9 +492,9 @@
                               <hr />
                               <h6 class="font-weight-bold mb-0">TO PAY  <span class="float-right">
                               @if (Session::has('coupon'))
-                                 ${{ Session()->get('coupon')['discount_amount'] }}
+                                 {{ Session()->get('coupon')['discount_amount'] }} TK
                               @else
-                                 ${{ $total }}
+                                 {{ $total }} TK
                               @endif</span></h6>
                            </div>
 
@@ -515,15 +515,15 @@
                            <img class="img-fluid float-left" src="{{ asset('frontend/img/wallet-icon.png') }}">
                            <h6 class="font-weight-bold text-right mb-2">Subtotal : <span class="text-danger"> 
                               @if (Session::has('coupon'))
-                              ${{ Session()->get('coupon')['discount_amount'] }}
+                                 {{ Session()->get('coupon')['discount_amount'] }} TK
                               @else
-                              ${{ $total }}
+                                 {{ $total }} TK
                               @endif
                            </span></h6>
                            <p class="seven-color mb-1 text-right">Extra charges may apply</p>
                            
                         </div>
-                        <a href="checkout.html" class="btn btn-success btn-block btn-lg">Checkout <i class="icofont-long-arrow-right"></i></a>
+                        <a href="{{ route('checkout') }}" class="btn btn-success btn-block btn-lg">Checkout <i class="icofont-long-arrow-right"></i></a>
                      </div>
              
                      <div class="text-center pt-2 mb-4">
