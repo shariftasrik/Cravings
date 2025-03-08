@@ -187,7 +187,7 @@ class BroadcastingInstallCommand extends Command
                 'yarn add --dev laravel-echo pusher-js',
                 'yarn run build',
             ];
-        } elseif (file_exists(base_path('bun.lockb'))) {
+        } elseif (file_exists(base_path('bun.lock')) || file_exists(base_path('bun.lockb'))) {
             $commands = [
                 'bun add --dev laravel-echo pusher-js',
                 'bun run build',
@@ -200,7 +200,7 @@ class BroadcastingInstallCommand extends Command
         }
 
         $command = Process::command(implode(' && ', $commands))
-                        ->path(base_path());
+            ->path(base_path());
 
         if (! windows_os()) {
             $command->tty(true);

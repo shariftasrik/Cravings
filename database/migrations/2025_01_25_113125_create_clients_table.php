@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('token')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
-            $table->string('role')->default('client');
-            $table->string('status')->default('1');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('clients')) { 
+            Schema::create('clients', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('email')->unique();
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('password');
+                $table->string('token')->nullable();
+                $table->string('photo')->nullable();
+                $table->string('phone')->nullable();
+                $table->string('address')->nullable();
+                $table->string('role')->default('client');
+                $table->string('status')->default('1');
+                $table->rememberToken();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

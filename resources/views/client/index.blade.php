@@ -11,10 +11,10 @@
     <div class="container-fluid">
 
         @if ($status === '1')
-        <h4>Restaurant Account is <span class="text-success">Active</span> </h4>
+            <h4>Restaurant Account is <span class="text-success">Active</span> </h4>
         @else   
-        <h4>Restaurant Account is <span class="text-danger">InActive</span> </h4> 
-        <p class="text-danger"><b>Plz wait admin will check and approve your account </b> </p> 
+            <h4>Restaurant Account is <span class="text-danger">InActive</span> </h4> 
+            <p class="text-danger"><b>Plz wait admin will check and approve your account </b> </p> 
         @endif
 
         <!-- start page title -->

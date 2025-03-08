@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; 
 use App\Models\Client;
+use App\Models\City;
 
 class ClientController extends Controller
 {
@@ -14,10 +15,10 @@ class ClientController extends Controller
    }
    // End Method 
 
-    public function ClientRegister(){
-        return view('client.client_register');
-    }
-    // End Method 
+   public function ClientRegister(){
+    return view('client.client_register');
+}
+// End Method 
 
     public function ClientRegisterSubmit(Request $request){
         $request->validate([
@@ -59,8 +60,9 @@ class ClientController extends Controller
         }else{
             return redirect()->route('client.login')->with('error','Invalid Creadentials');
         }
+
     }
-    // End Method 
+// End Method 
 
     public function ClientDashboard(){
         return view('client.index');
@@ -74,13 +76,14 @@ class ClientController extends Controller
     // End Method 
 
     public function ClientProfile(){
+        $city = City::latest()->get();
         $id = Auth::guard('client')->id();
         $profileData = Client::find($id);
-        return view('client.client_profile',compact('profileData'));
+        return view('client.client_profile',compact('profileData','city'));
      }
-    // End Method 
-
-    public function ClientProfileStore(Request $request){
+      // End Method 
+ 
+      public function ClientProfileStore(Request $request){
         $id = Auth::guard('client')->id();
         $data = Client::find($id);
 
@@ -88,18 +91,20 @@ class ClientController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
         $data->address = $request->address;
+        $data->city_id = $request->city_id;
+        $data->shop_info = $request->shop_info; 
 
         $oldPhotoPath = $data->photo;
 
         if ($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('upload/client_images'),$filename);
-            $data->photo = $filename;
+           $file = $request->file('photo');
+           $filename = time().'.'.$file->getClientOriginalExtension();
+           $file->move(public_path('upload/client_images'),$filename);
+           $data->photo = $filename;
 
-            if ($oldPhotoPath && $oldPhotoPath !== $filename) {
-                $this->deleteOldImage($oldPhotoPath);
-            }
+           if ($oldPhotoPath && $oldPhotoPath !== $filename) {
+             $this->deleteOldImage($oldPhotoPath);
+           }
 
         }
 
@@ -108,7 +113,7 @@ class ClientController extends Controller
             $filename1 = time().'.'.$file1->getClientOriginalExtension();
             $file1->move(public_path('upload/client_images'),$filename1);
             $data->cover_photo = $filename1; 
-            }
+         }
 
         $data->save();
 
@@ -119,30 +124,29 @@ class ClientController extends Controller
 
         return redirect()->back()->with($notification);
     }
-    // End Method 
-
-    private function deleteOldImage(string $oldPhotoPath): void {
+     // End Method 
+     private function deleteOldImage(string $oldPhotoPath): void {
         $fullPath = public_path('upload/client_images/'.$oldPhotoPath);
         if (file_exists($fullPath)) {
             unlink($fullPath);
         }
-    }
-    // End Private Method 
+     }
+     // End Private Method 
 
-    public function ClientChangePassword(){
+     public function ClientChangePassword(){
         $id = Auth::guard('client')->id();
         $profileData = Client::find($id);
         return view('client.client_change_Password',compact('profileData'));
-    }
-    // End Method 
+     }
+      // End Method 
 
-    public function ClientPasswordUpdate(Request $request){
+      public function ClientPasswordUpdate(Request $request){
         $client = Auth::guard('client')->user();
         $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|confirmed'
         ]);
-
+ 
         if (!Hash::check($request->old_password,$client->password)) {
             $notification = array(
                 'message' => 'Old Password Does not Match!',
@@ -160,6 +164,8 @@ class ClientController extends Controller
                 'alert-type' => 'success'
             );
             return back()->with($notification);
-    }
-    // End Method 
+     }
+      // End Method 
+
+
 }
