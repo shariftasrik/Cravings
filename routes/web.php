@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ManageOrderController;
 use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\RestaurantController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\FilterController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 
@@ -142,6 +143,7 @@ Route::middleware('admin')->group(function () {
     });
 
 
+
  
     
 }); 
@@ -229,5 +231,11 @@ Route::controller(CartController::class)->group(function(){
 
 Route::controller(OrderController::class)->group(function(){
     Route::post('/cash_order', 'CashOrder')->name('cash_order');
+
+});
+
+Route::controller(FilterController::class)->group(function(){
+    Route::get('/list/restaurant', 'ListRestaurant')->name('list.restaurant');  
+    Route::get('/filter/products', 'FilterProducts')->name('filter.products');
 
 });
