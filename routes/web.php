@@ -20,7 +20,7 @@ Route::get('/', [UserController::class, 'Index'])->name('index');
 
 
 Route::get('/dashboard', function () {
-    return view('frontend.dashboard.dashboard');
+    return view('frontend.dashboard.profile');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -29,6 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
     Route::get('/change/password', [UserController::class, 'ChangePassword'])->name('change.password');
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
+
+    Route::get('/all/wishlist', [HomeController::class, 'AllWishlist'])->name('all.wishlist');
+    Route::get('/remove/wishlist/{id}', [HomeController::class, 'RemoveWishlist'])->name('remove.wishlist');
+
    
 });
 
@@ -42,7 +46,8 @@ Route::middleware('admin')->group(function () {
     Route::post('/admin/password/update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
 });
 
-
+Route::get('/admin/register', [AdminController::class, 'AdminRegister'])->name('admin.register');
+Route::post('/admin/register/submit', [AdminController::class, 'AdminRegisterSubmit'])->name('admin.register.submit');
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 Route::post('/admin/login_submit', [AdminController::class, 'AdminLoginSubmit'])->name('admin.login_submit');
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
@@ -184,5 +189,6 @@ Route::get('/changeStatus', [RestaurantController::class, 'ChangeStatus']);
 
 Route::controller(HomeController::class)->group(function(){
     Route::get('/restaurant/details/{id}', 'RestaurantDetails')->name('res.details'); 
+    Route::post('/add-wish-list/{id}', 'AddWishList'); 
 
 });

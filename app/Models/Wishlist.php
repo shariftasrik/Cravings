@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class Wishlist extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    
-    public function products(){
-        return $this->hasMany(Product::class);
+
+    public function client(){
+        return $this->belongsTo(Client::class, 'client_id','id');
     }
 }
