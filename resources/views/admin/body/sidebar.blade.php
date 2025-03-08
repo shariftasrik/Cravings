@@ -95,6 +95,23 @@
         </li>
 
 
+        <!-- Manage Banner -->
+        <li>
+            <a href="javascript: void(0);" class="has-arrow">
+                <i data-feather="grid"></i>
+                <span data-key="t-apps">Manage Banner</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li>
+                    <a href="{{ route('all.banner') }}">
+                        <span data-key="t-calendar">All Banner </span>
+                    </a>
+                </li> 
+
+            </ul>
+        </li>
+
+
         <li class="menu-title mt-2" data-key="t-components">Elements</li>
 
         <li>
