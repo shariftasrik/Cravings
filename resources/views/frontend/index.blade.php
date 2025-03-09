@@ -31,7 +31,12 @@
             <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                <div class="list-card-image">
                   <div class="star position-absolute"><span class="badge badge-success"><i class="icofont-star"></i> 3.1 (300+)</span></div>
-                  <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i class="icofont-heart"></i></a></div>
+
+                  <div class="favourite-heart text-danger position-absolute">
+                     <a aria-label="Add to Wishlist" onclick="addWishList('{{$client->id}}')"><i class="icofont-heart"></i></a>
+                  </div>
+
+
 
                   @if ($coupons)
                      <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
@@ -50,7 +55,7 @@
                   </div>
                   <div class="list-card-badge">
                      @if ($coupons)
-                        <span class="badge badge-success">OFFER</span> <small>{{ $coupons->discount  }}% off | Use Coupon {{ $coupons->coupon_name  }}</small>
+                        <span class="badge badge-success">OFFER</span> <small>{{ $coupons->discount  }}% off | Use {{ $coupons->coupon_name  }}</small>
                      @else 
                         <span class="badge badge-success">OFFER</span> <small>Right Now There Have No Coupon</small>
                      @endif

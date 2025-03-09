@@ -4,9 +4,10 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="csrf-token" content="{{ csrf_token() }}" >
       <meta name="description" content="Askbootstrap">
       <meta name="author" content="Askbootstrap">
-      <title>Cravings - Online Food Ordering Website HTML Template</title>
+      <title>Cravings - Online Food Ordering Application</title>
       <!-- Favicon Icon -->
       <link rel="icon" type="image/png" href="{{asset('frontend/img/favicon.png')}}">
       <!-- Bootstrap core CSS-->
@@ -22,6 +23,9 @@
       <!-- Owl Carousel -->
       <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.carousel.css')}}">
       <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.theme.css')}}">
+
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+
    </head>
    <body>
       <div class="homepage-header">
@@ -53,5 +57,84 @@
       <script src="{{asset('frontend/vendor/owl-carousel/owl.carousel.js')}}"></script>
       <!-- Custom scripts for all pages-->
       <script src="{{asset('frontend/js/custom.js')}}"></script>
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+      @if(Session::has('message'))
+      <script>
+       
+       var type = "{{ Session::get('alert-type','info') }}"
+       switch(type){
+          case 'info':
+          toastr.info(" {{ Session::get('message') }} ");
+          break;
+      
+          case 'success':
+          toastr.success(" {{ Session::get('message') }} ");
+          break;
+      
+          case 'warning':
+          toastr.warning(" {{ Session::get('message') }} ");
+          break;
+      
+          case 'error':
+          toastr.error(" {{ Session::get('message') }} ");
+          break; 
+       }
+       
+      </script>
+      @endif 
+
+
+      {{-- ------------ Wishlist Add Start ----------- --}}
+      <script type="text/javascript">
+         $.ajaxSetup({
+            headers:{
+               'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            }
+         });
+      function addWishList(id){
+         //alert(id)
+         $.ajax({
+            type: "POST",
+            dataType:"json",
+            url:"/add-wish-list/"+id,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            success:function(data){
+              // Start Message 
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    icon: 'success', 
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    icon: 'error', 
+                    title: data.error, 
+                    })
+                }
+              // End Message  
+            }
+         })
+      }    
+      </script>
+
+
    </body>
 </html>
