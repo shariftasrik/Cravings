@@ -285,21 +285,21 @@ Figma Design   : <a href="https://www.figma.com/design/mIyp8Q47ff0GPxNW5YWKlt/Cr
  ## To run this project into your PC/Laptop
 
  <ul>
-<li>Install XAMPP from /</li>
+<li>Install XAMPP from </li>
      
      https://www.apachefriends.org
-<li>Open xampp into brower and go to /</li>
+<li>Open xampp into brower and go to </li>
 
     http://localhost/phpmyadmin/
 <li>Make a database called "cravings"</li>
 
-<li>Install nodejs from /</li>
+<li>Install nodejs from </li>
      
      nodejs.org/en/download
-<li>Install composer from /</li>
+<li>Install composer from </li>
      
      https://getcomposer.org/
-<li>Install laravel from /</li>
+<li>Install laravel from </li>
      
       Install Laravel from https://laravel.com/     
      
@@ -314,11 +314,6 @@ Figma Design   : <a href="https://www.figma.com/design/mIyp8Q47ff0GPxNW5YWKlt/Cr
      php artisan migrate
      php artisan optimize
      php artisan serve
-<li>Apply Coupon</li>
 </ul>
-****
-
-    
-
-**    
+  
 
