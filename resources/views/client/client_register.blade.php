@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="mt-4 text-center">
-                            <p class="text-muted">Already have an account? <a href="./client_register.blade.php" class="text-primary fw-semibold">Sign In</a></p>
+                            <p class="text-muted">Already have an account? <a href="{{ route('client.login')}}" class="text-primary fw-semibold">Sign In</a></p>
                         </div>
 
                         <div class="mt-4 text-center">

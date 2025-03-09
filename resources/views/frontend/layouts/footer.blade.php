@@ -26,10 +26,10 @@
             <div class="app">
                <p class="mb-2">DOWNLOAD APP</p>
                <a href="#">
-               <img class="img-fluid" src="img/google.png">
+               <img class="img-fluid" src="{{ asset('frontend/img/google.png') }}">
                </a>
                <a href="#">
-               <img class="img-fluid" src="img/apple.png">
+               <img class="img-fluid" src="{{ asset('frontend/img/apple.png') }}">
                </a>
             </div>
          </div>

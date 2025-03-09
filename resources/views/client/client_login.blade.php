@@ -126,8 +126,8 @@
                                 </div>
 
                                 <div class="mt-5 text-center">
-                                    <p class="text-muted mb-0">Don't have an account ? <a href="./client_register.blade.php"
-                                            class="text-primary fw-semibold"> SignUp now </a> </p>
+                                    <p class="text-muted mb-0">Don't have an account ? <a href="{{ route('client.register')}}"
+                                            class="text-primary fw-semibold"> Register </a> </p>
                                 </div>
                             </div>
                             <div class="mt-4 mt-md-5 text-center">

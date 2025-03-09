@@ -7,9 +7,13 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ManageController;
+use App\Http\Controllers\Admin\ManageOrderController;
 use App\Http\Controllers\Client\CouponController;
 use App\Http\Controllers\Client\RestaurantController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\FilterController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OrderController;
 
 
 // Route::get('/', function () {
@@ -20,7 +24,7 @@ Route::get('/', [UserController::class, 'Index'])->name('index');
 
 
 Route::get('/dashboard', function () {
-    return view('frontend.dashboard.dashboard');
+    return view('frontend.dashboard.profile');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -29,6 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
     Route::get('/change/password', [UserController::class, 'ChangePassword'])->name('change.password');
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
+
+    Route::get('/all/wishlist', [HomeController::class, 'AllWishlist'])->name('all.wishlist');
+    Route::get('/remove/wishlist/{id}', [HomeController::class, 'RemoveWishlist'])->name('remove.wishlist');
+
    
 });
 
@@ -42,7 +50,8 @@ Route::middleware('admin')->group(function () {
     Route::post('/admin/password/update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
 });
 
-
+Route::get('/admin/register', [AdminController::class, 'AdminRegister'])->name('admin.register');
+Route::post('/admin/register/submit', [AdminController::class, 'AdminRegisterSubmit'])->name('admin.register.submit');
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 Route::post('/admin/login_submit', [AdminController::class, 'AdminLoginSubmit'])->name('admin.login_submit');
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
@@ -117,6 +126,24 @@ Route::middleware('admin')->group(function () {
 
     });
 
+    Route::controller(ManageOrderController::class)->group(function(){
+        Route::get('/pending/order', 'PendingOrder')->name('pending.order');
+        Route::get('/confirm/order', 'ConfirmOrder')->name('confirm.order'); 
+        Route::get('/processing/order', 'ProcessingOrder')->name('processing.order'); 
+        Route::get('/deliverd/order', 'DeliverdOrder')->name('deliverd.order');
+        Route::get('/admin/order/details/{id}', 'AdminOrderDetails')->name('admin.order.details');  
+    });
+
+    Route::controller(ManageOrderController::class)->group(function(){
+        Route::get('/pening_to_confirm/{id}', 'PendingToConfirm')->name('pening_to_confirm');
+        Route::get('/confirm_to_processing/{id}', 'ConfirmToProcessing')->name('confirm_to_processing'); 
+        Route::get('/processing_to_deliverd/{id}', 'ProcessingToDiliverd')->name('processing_to_deliverd'); 
+ 
+
+    });
+
+
+
  
     
 }); 
@@ -184,5 +211,32 @@ Route::get('/changeStatus', [RestaurantController::class, 'ChangeStatus']);
 
 Route::controller(HomeController::class)->group(function(){
     Route::get('/restaurant/details/{id}', 'RestaurantDetails')->name('res.details'); 
+    Route::post('/add-wish-list/{id}', 'AddWishList'); 
+
+});
+
+
+Route::controller(CartController::class)->group(function(){
+    Route::get('/add_to_cart/{id}', 'AddToCart')->name('add_to_cart');
+    Route::post('/cart/update-quantity', 'updateCartQuanity')->name('cart.updateQuantity');
+    Route::post('/cart/remove', 'CartRemove')->name('cart.remove');    
+
+    Route::post('/apply-coupon', 'ApplyCoupon');
+    Route::get('/remove-coupon', 'CouponRemove');
+
+    Route::get('/checkout', 'ShopCheckout')->name('checkout');
+
+});
+
+
+Route::controller(OrderController::class)->group(function(){
+    Route::post('/cash_order', 'CashOrder')->name('cash_order');
+    Route::post('/stripe_order', 'StripeOrder')->name('stripe_order');
+
+});
+
+Route::controller(FilterController::class)->group(function(){
+    Route::get('/list/restaurant', 'ListRestaurant')->name('list.restaurant');  
+    Route::get('/filter/products', 'FilterProducts')->name('filter.products');
 
 });
