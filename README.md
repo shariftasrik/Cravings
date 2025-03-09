@@ -281,3 +281,44 @@ Figma Design   : <a href="https://www.figma.com/design/mIyp8Q47ff0GPxNW5YWKlt/Cr
  </table>
 
 
+ # Setup instruction
+ ## To run this project into your PC/Laptop
+
+ <ul>
+<li>Install XAMPP from /</li>
+     
+     https://www.apachefriends.org
+<li>Open xampp into brower and go to /</li>
+
+    http://localhost/phpmyadmin/
+<li>Make a database called "cravings"</li>
+
+<li>Install nodejs from /</li>
+     
+     nodejs.org/en/download
+<li>Install composer from /</li>
+     
+     https://getcomposer.org/
+<li>Install laravel from /</li>
+     
+      Install Laravel from https://laravel.com/     
+     
+<li>Visit this github repository</li>
+     
+     https://github.com/shariftasrik/Cravings
+     
+<li>Make a folder inside c/xampp/htdcos & Clone the repositroy into that folder </li>
+<li>Open the project folder into VS CODE</li>
+<li>Open a terminal with git bash</li>
+
+     php artisan migrate
+     php artisan optimize
+     php artisan serve
+<li>Apply Coupon</li>
+</ul>
+****
+
+    
+
+**    
+
