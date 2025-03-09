@@ -288,6 +288,8 @@ Figma Design   : <a href="https://www.figma.com/design/mIyp8Q47ff0GPxNW5YWKlt/Cr
 <li>Install XAMPP from </li>
      
      https://www.apachefriends.org
+
+<li>Open XAMPP Controll Panel and start 'apache' & 'mysql'</li>
 <li>Open xampp into brower and go to </li>
 
     http://localhost/phpmyadmin/
