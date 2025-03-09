@@ -4,7 +4,7 @@
     <div class="container">
        <div class="section-header text-center">
           <h2>Popular Restaurants</h2>
-          <p>Top restaurants, cafes, pubs, and bars in Ludhiana, based on trends</p>
+          <p>Top restaurants, dishes, cafes, and hotels in Dhaka, based on trends</p>
           <span class="line"></span>
        </div>
        <div class="row">
