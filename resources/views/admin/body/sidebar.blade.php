@@ -142,29 +142,7 @@
         </li>
 
 
-        <li class="menu-title mt-2" data-key="t-components">Elements</li>
-
-        <li>
-            <a href="javascript: void(0);" class="has-arrow">
-                <i data-feather="briefcase"></i>
-                <span data-key="t-components">Components</span>
-            </a>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="ui-alerts.html" data-key="t-alerts">Alerts</a></li>
-                <li><a href="ui-buttons.html" data-key="t-buttons">Buttons</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="javascript: void(0);" class="has-arrow">
-                <i data-feather="gift"></i>
-                <span data-key="t-ui-elements">Extended</span>
-            </a>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="extended-lightbox.html" data-key="t-lightbox">Lightbox</a></li>
-                <li><a href="extended-rangeslider.html" data-key="t-range-slider">Range Slider</a></li>
-            </ul>
-        </li>
+        
 
     </ul>
 
