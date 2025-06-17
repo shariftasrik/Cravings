@@ -28,7 +28,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light osahan-nav shadow-sm">
          <div class="container">
-            <a class="navbar-brand" href="{{ route('index') }}"><img alt="logo" src="{{ asset('frontend/img/cravings-logo.png') }}"> <span id="logoCravings">CRAVINGS</span></a>
+            <a class="navbar-brand" href="{{ route('index') }}"><img alt="logo" src="{{ asset('frontend/img/cravings-logo.png') }}"> <span id="logoCravings" class="text-2xl tracking-wide" style="font-family: 'Pacifico', cursive;">CRAVINGS</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,7 +46,7 @@
 
                   <!-- Restaurants -->
                   <li class="nav-item dropdown">
-                     <a class="nav-link" href="{{ route('list.restaurant') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Restaurants</a>
+                     <a class="nav-link" href="{{ route('list.restaurant') }}" role="button" aria-haspopup="true" aria-expanded="false">Restaurants</a>
                   </li>
 
                   <!-- My Account -->
