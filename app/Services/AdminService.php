@@ -125,24 +125,24 @@ class AdminService
     }
 
     public function changePassword($adminId, array $data)
-{
-    $admin = Admin::find($adminId); 
+    {
+        $admin = Admin::find($adminId); 
 
-    if (!$admin) {
-        throw new \Exception("Admin not found for ID: $adminId");
+        if (!$admin) {
+            throw new \Exception("Admin not found for ID: $adminId");
+        }
+
+        if (!Hash::check($data['old_password'], $admin->password)) {
+            return redirect()->back()->with('error', 'Old Password Does Not Match');
+        }
+
+        $admin->password = Hash::make($data['new_password']);
+
+        if (!$admin->save()) {
+            throw new \Exception("Failed to update password.");
+        }
+
+        return redirect()->back()->with('success', 'Password Changed Successfully');
     }
-
-    if (!Hash::check($data['old_password'], $admin->password)) {
-        return redirect()->back()->with('error', 'Old Password Does Not Match');
-    }
-
-    $admin->password = Hash::make($data['new_password']);
-
-    if (!$admin->save()) {
-        throw new \Exception("Failed to update password.");
-    }
-
-    return redirect()->back()->with('success', 'Password Changed Successfully');
-}
-
+    
 }

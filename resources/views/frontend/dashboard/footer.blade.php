@@ -26,10 +26,10 @@
                   <div class="app">
                      <p class="mb-2">DOWNLOAD APP</p>
                      <a href="#">
-                     <img class="img-fluid" src="img/google.png">
+                     <img class="img-fluid" src="{{ asset('frontend/img/google.png') }}">
                      </a>
                      <a href="#">
-                     <img class="img-fluid" src="img/apple.png">
+                     <img class="img-fluid" src="{{ asset('frontend/img/apple.png') }}">
                      </a>
                   </div>
                </div>
@@ -74,7 +74,7 @@
                <div class="col-xl-12">
                   <p class="mt-4 text-black">POPULAR FOOD</p>
                   <div class="search-links">
-                     <a href="#">Fast Food</a> |  <a href="#">Chinese</a> | <a href="#">Street Food</a> |  <a href="#">Continental</a>  |  <a href="#">Mithai</a> |  <a href="#">Cafe</a>  |  <a href="#">Deshi</a> |  <a href="#">Fast Food</a> |  <a href="#">Chinese</a> | <a href="#">Street Food</a> |  <a href="#">Continental</a>  |  <a href="#">Mithai</a> |  <a href="#">Cafe</a>  |  <a href="#">Bangladeshi</a> |  <a href="#">Chatgaiya Mejban</a><a href="#">Fast Food</a> |  <a href="#">Chinese</a> | <a href="#">Street Food</a> |  <a href="#">Continental</a>  |  <a href="#">Mithai</a> |  <a href="#">Cafe</a>  |    <a href="#">Chinese</a> | <a href="#">Street Food</a> |  <a href="#">Continental</a>  |  <a href="#">Mithai</a> |  <a href="#">Cafe</a>  
+                     <a href="#">Fast Food</a> |  <a href="#">Chinese</a> | <a href="#">Street Food</a> |  <a href="#">Continental</a>  |  <a href="#">Mithai</a> |  <a href="#">Cafe</a>  |  <a href="#">Biryani</a> |  <a href="#">Fuchka</a> |  <a href="#">Chotpoti</a> | <a href="#">Kacchi</a> |  <a href="#">Chatgaiya Mejban</a>  |  <a href="#">Paratha</a> |  <a href="#">Grilled Chicken</a>  |  <a href="#">Bangladeshi</a> |  <a href="#">Chatgaiya Mejban</a><a href="#">Momo</a> |  <a href="#">Meat Ball</a> | <a href="#">Pasta</a> |  <a href="#">Chinese</a> | <a href="#">Street Food</a> |  <a href="#">Continental</a>  |  <a href="#">Mithai</a> |  <a href="#">Cafe</a>  
                   </div>
                </div>
             </div>
@@ -82,18 +82,25 @@
       </section>
       <footer class="pt-4 pb-4 text-center">
          <div class="container">
-            <p class="mt-0 mb-0">© Copyright 2025 Cravings. All Rights Reserved</p>
-            <a class="text-danger" target="_blank" href="https://www.instagram.com/iamgurdeeposahan/">CRAVINGS</a> - <a class="text-primary" target="_blank" href="https://askbootstrap.com/">Order Food</a>
+            <p class="mt-0 mb-0">© Copyright <span id="currentYear"></span> Cravings. All Rights Reserved</p>          
+            <a class="text-danger" target="_blank" href="#">CRAVINGS</a> - <a class="text-primary" target="_blank" href="https://askbootstrap.com/">Order Food</a>
             </small>
          </div>
       </footer>
+
+
       <!-- jQuery -->
-      <script src="{{ asset('frontend/vendor/jquery/jquery-3.3.1.slim.min.js') }}"></script>
+      <!-- <script src="{{ asset('frontend/vendor/jquery/jquery-3.3.1.slim.min.js') }}"></script> -->
       <!-- Bootstrap core JavaScript-->
-      <script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+      <!-- <script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
       <!-- Select2 JavaScript-->
-      <script src="{{ asset('frontend/vendor/select2/js/select2.min.js') }}"></script>
+      <!-- <script src="{{ asset('frontend/vendor/select2/js/select2.min.js') }}"></script> -->
+      
+      <!-- <script src="{{ asset('frontend/vendor/owl-carousel/owl.carousel.js') }}"></script> -->
       <!-- Custom scripts for all pages-->
-      <script src="{{ asset('frontend/js/custom.js') }}"></script>
+      <!-- <script src="{{ asset('frontend/js/custom.js') }}"></script> -->
+
+      <!-- Custom Year -->
+      <!-- <script>document.getElementById("currentYear").textContent = new Date().getFullYear();</script>
    </body>
-</html>
+</html> -->

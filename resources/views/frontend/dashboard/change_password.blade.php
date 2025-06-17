@@ -1,4 +1,5 @@
-@include('frontend.dashboard.header')
+@extends('frontend.dashboard.dashboard')
+@section('dashboard')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -96,7 +97,7 @@
 </script>
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
  @if(Session::has('message'))
     <script>
@@ -121,4 +122,6 @@
     </script>
  @endif 
 
-@include('frontend.dashboard.footer')
+@include('frontend.dashboard.footer') -->
+
+@endsection

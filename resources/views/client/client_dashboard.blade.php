@@ -51,7 +51,7 @@
             <!-- ============================================================== -->
 <div class="main-content">
 
-     @yield('client') <!-- eita id name ke client dara declare korlam,index e section ei id e call krbe -->
+     @yield('client')
 <!-- End Page-content -->
 
 @include('client.body.footer')
@@ -102,15 +102,17 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="{{ asset('backend/assets/js/code.js') }}"></script>
 
-        
+        <!-- Toggle -->
         <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         
+
+        <!-- Toaster -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-        
+
     @if(Session::has('message'))
         <script>
-
+    
          var type = "{{ Session::get('alert-type','info') }}"
          switch(type){
             case 'info':
@@ -128,10 +130,10 @@
             case 'error':
             toastr.error(" {{ Session::get('message') }} ");
             break; 
-        }
-          
+         }
+         
         </script>
-    @endif
+    @endif     
         
     </body>
 
